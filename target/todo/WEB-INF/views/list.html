@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<title>TODO:{{ parent_caption }}</title>
+{{ include style }}
+{{ include menu }}
+
+<div class=container>
+	<h2>{{ parent_caption }}</h2>
+	<h3>Задачи</h3>
+	<div class="split listmenu">
+		<div class=splitleft>{{ unsafe back }}Страница: {{ unsafe pages }}</div>
+		<div class=splitright><a class="cmd" href="edit?id=0&amp;parent={{ parent }}&amp;page={{ page }}">Добавить задачу</a></div>
+	</div>
+
+	<h3></h3>
+	<br>
+{{ unsafe todos }}
+</div>
+{{ include bottom }}
+

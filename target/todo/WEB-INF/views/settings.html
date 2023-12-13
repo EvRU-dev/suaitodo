@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<title>TODO:Настройки</title>
+{{ include style }}
+{{ include menu }}
+<div class="container">
+	<h2>TODO</h2>
+	
+	<form method=post action=settings>
+		<h3>Настройки</h3>
+	
+		<p><span class=setting>Количество записей на странице:</span> <input type=text name=itemsperpage value="{{ itemsperpage }}"></p>
+		
+		<h3>Изменить пароль</h3>
+
+		<div class=warning><i>{{ warning }}</i></div>
+		<p><span class=setting>Текущий пароль:</span> <input type=password name=password></p>
+		<p><span class=setting>Новый пароль:</span> <input type=password name=new></p>
+		
+		<hr>
+		
+		<div style="text-align:center;"><input type=submit value=Сохранить></div>
+	</form>
+	<hr>
+</div>
+{{ include bottom }}

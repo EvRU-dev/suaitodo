@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<title>TODO:редактирование</title>
+{{ include style }}
+{{ include menu }}
+
+<div class=container>
+	<h2>TODO</h2>
+	<h3>Редактор</h3>
+	
+	<form method=post action=edit>
+		<input type=hidden name=id value="{{ id }}">
+		<input type=hidden name=parent value="{{ parent }}">
+		<input type=hidden name=page value="{{ page }}">
+
+		<p><div style="text-align:center;"><input class=caption name=caption type=text value="{{ caption }}"></div></p>
+		<p class=edit><span class=edit>Дедлайн:</span> {{ unsafe date }}</p>
+		<p class=edit><label><span class=edit>Важное:</span> <input type=checkbox name=priority value=1 {{ priority }}></label></p>
+		<p class=edit><label><span class=edit>Выполнено:</span> <input type=checkbox name=done value=1 {{ done }}></label></p>
+		<p><div style="text-align:center;"><textarea class=comment name=comment>{{ comment }}</textarea></div></p>
+		
+		<div style="text-align:center;"><input type=submit value=Сохранить></div>
+	</form>
+	<hr>
+</div>
+{{ include bottom }}
+

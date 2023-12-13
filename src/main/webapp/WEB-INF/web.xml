@@ -1,0 +1,188 @@
+<!-- https://maven.apache.org/plugins/maven-war-plugin/usage.html -->
+
+<web-app>
+
+	<listener>
+		<listener-class>org.suai.todo.utils.YourServletContextListener</listener-class>
+	</listener>
+
+	<!-- включает подробные сообщения об ошибках и страницу debug -->
+	
+	<context-param>
+		<param-name>debug</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+
+	<!-- полный путь к файлу БД -->
+	
+	<context-param>
+		<param-name>dbfilename</param-name>
+		<param-value>/home/evru/Documents/todoData/todo.db</param-value>
+	</context-param>
+
+
+	<!-- фильтр для записи журнала запросов -->
+	
+	<filter>
+		<filter-name>access-log</filter-name>
+		<filter-class>org.suai.todo.utils.AccessLog</filter-class>
+		<init-param>
+			<param-name>filename</param-name>
+			<param-value>/home/evru/Documents/todoData/accesslog.log</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>access-log</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<!-- если в следующих обработчиках происходит ошибка исполнения 
+	     фильтр ее перехватит и отобразит страницу 500 -->
+
+	<filter>
+		<filter-name>error-log</filter-name>
+		<filter-class>org.suai.todo.utils.ErrorLog</filter-class>
+		<init-param>
+			<param-name>filename</param-name>
+			<param-value>/home/evru/Documents/todoData/errorlog.log</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>error-log</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<!-- обслуживание статических файлов -->
+
+	<servlet-mapping>   
+		<servlet-name>default</servlet-name>
+		<url-pattern>/static/*</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- фильтр для проверки полномочий пользователя -->
+
+	<!--<filter>
+		<filter-name>login-filter</filter-name>
+		<filter-class>org.suai.todo.utils.LoginFilter</filter-class>
+	</filter>-->
+
+	<!--<filter-mapping>
+		<filter-name>login-filter</filter-name>
+		<url-pattern>/login</url-pattern>
+		<url-pattern>/register</url-pattern>
+		<url-pattern>/list</url-pattern>
+		<url-pattern>/edit</url-pattern>
+		<url-pattern>/delete</url-pattern>
+		<url-pattern>/settings</url-pattern>
+	</filter-mapping>-->
+
+
+	<!-- сервлеты -->
+	
+	<servlet>
+		<servlet-name>todo-login</servlet-name>
+		<servlet-class>org.suai.todo.viewController.TodoLogin</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>todo-login</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	
+
+	<servlet>
+		<servlet-name>todo-register</servlet-name>
+		<servlet-class>org.suai.todo.viewController.TodoRegister</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>todo-register</servlet-name>
+		<url-pattern>/register</url-pattern>
+	</servlet-mapping>
+
+	
+	<servlet>
+		<servlet-name>todo-settings</servlet-name>
+		<servlet-class>org.suai.todo.viewController.TodoSettings</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>todo-settings</servlet-name>
+		<url-pattern>/settings</url-pattern>
+	</servlet-mapping>
+
+	
+	<servlet>
+		<servlet-name>todo-list</servlet-name>
+		<servlet-class>org.suai.todo.viewController.TodoList</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>todo-list</servlet-name>
+		<url-pattern>/list</url-pattern>
+	</servlet-mapping>
+
+	
+	<servlet>
+		<servlet-name>todo-edit</servlet-name>
+		<servlet-class>org.suai.todo.viewController.TodoEdit</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>todo-edit</servlet-name>
+		<url-pattern>/edit</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>todo-delete</servlet-name>
+		<servlet-class>org.suai.todo.viewController.TodoDelete</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>todo-delete</servlet-name>
+		<url-pattern>/delete</url-pattern>
+	</servlet-mapping>
+
+	
+	<servlet>
+		<servlet-name>todo-exit</servlet-name>
+		<servlet-class>org.suai.todo.viewController.TodoExit</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>todo-exit</servlet-name>
+		<url-pattern>/exit</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>todo-debug</servlet-name>
+		<servlet-class>org.suai.todo.viewController.TodoDebug</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>todo-debug</servlet-name>
+		<url-pattern>/debug</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- сервлет для всех остальных путей -->
+		
+	<servlet>
+		<servlet-name>todo-default</servlet-name>
+		<servlet-class>org.suai.todo.viewController.TodoDefault</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>todo-default</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+</web-app>
